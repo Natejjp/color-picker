@@ -11,6 +11,27 @@ body {
   min-height: 100%;
 }
 
-.test {
+h1 {
   display: flex;
+  justify-content: center;
+}
+.everything {
+  display: flex;
+  flex-direction: column;
+}
+.box {
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+button {
+  padding: 1rem;
+  border: 2px solid black;
+}
+
+p {
+  padding: 1rem;
 }

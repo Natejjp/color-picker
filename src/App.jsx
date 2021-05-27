@@ -2,12 +2,21 @@ import React, { Component } from 'react'
 
 export class App extends Component {
   state = {
-    hue: Math.floor(Math.random() * 360),
+    hue: 0,
     saturation: 0,
     lighting: 0,
-    alpha: 0,
   }
 
+  handleHueChange = event => {
+    this.setState({ hue: event.target.value })
+  }
+  handleNewColor = event => {
+    this.setState({
+      hue: Math.floor(Math.random() * 360),
+      saturation: Math.floor(Math.random() * 100),
+      lighting: Math.floor(Math.random() * 50),
+    })
+  }
   handleSaturationChange = event => {
     this.setState({ saturation: event.target.value })
   }
@@ -16,30 +25,21 @@ export class App extends Component {
     this.setState({ lighting: event.target.value })
   }
 
-  handleAlphaChange = event => {
-    this.setState({ alpha: event.target.value })
-  }
-
   render() {
+    const color = `hsl(${this.state.hue},${this.state.saturation}%,${this.state.lighting}%)`
     return (
-      <>
-        <h1
-          className="box"
-          style={{ backgroundColor: `hsl(${this.state.hue},100%,50%)` }}
-        >
-          Color Picker
-        </h1>
+      <div className="everything">
+        <h1>Color Picker</h1>
+        <div className="box" style={{ backgroundColor: color }}></div>
         <p>H: {this.state.hue}</p>
         <input
           type="range"
           value={this.state.hue}
           max="360"
-          onChange={event => {
-            this.setState({ hue: event.target.value })
-          }}
+          onChange={this.handleHueChange}
         />
 
-        {/* <p>S: {this.state.saturation}</p>
+        <p>S: {this.state.saturation}</p>
         <input
           type="range"
           value={this.state.saturation}
@@ -55,14 +55,8 @@ export class App extends Component {
           onChange={this.handleLightingChange}
         />
 
-        <p>A: {this.state.alpha}</p>
-        <input
-          type="range"
-          value={this.state.alpha}
-          max="360"
-          onChange={this.handleAlphaChange}
-        /> */}
-      </>
+        <button onClick={this.handleNewColor}>Random Color</button>
+      </div>
     )
   }
 }
